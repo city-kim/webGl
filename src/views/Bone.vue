@@ -1,5 +1,6 @@
 <template>
   <div id="bone">
+    <div class="born-loading" v-show="!ui.fileLoad">LOADING...</div>
     <div id="info">REAMINS</div>
     <div class="url">
       <a href="https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061" target="_blank">USED: https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061</a>
@@ -15,15 +16,25 @@ export default {
   },
   data () {
     return {
+      ui: {
+        fileLoad: false
+      }
     }
   },
   beforeCreate () {
   },
   created () {
   },
-  mounted () {
-    init();
-    render();
+  async mounted () {
+    await init()
+    .then((res) => {
+      // console.log(res)
+      this.ui.fileLoad = true
+      render();
+    })
+    .catch((err) => {
+      console.log(err)
+    });
   },
   beforeDestroy () {
   },
@@ -50,5 +61,15 @@ export default {
 	top: 30rem;
 	z-index: 100;
   box-sizing: border-box;
+}
+.born-loading {
+  position: fixed;
+  width:100%;
+  top:20vh;
+  left:0;
+  z-index:10;
+  font-size:30px;
+  color:#fff;
+  text-align: center;
 }
 </style>

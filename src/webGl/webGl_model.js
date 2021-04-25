@@ -5,68 +5,73 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 let camera, scene, renderer;
 let step;
 let animationId;
+let isLoad = false;
 
 function init() {
-  let container;
-  let bone;
-  let spotLight;
-  step = 1;
-  camera = null;
-  scene = null;
-  renderer = null;
-  if (animationId) {
-    cancelAnimationFrame(animationId);
-    animationId = null;
-  }
+  return new Promise ((resolve, reject) => {
+    let container;
+    let bone;
+    let spotLight;
+    step = 1;
+    camera = null;
+    scene = null;
+    renderer = null;
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+    }
 
-  container = document.createElement( 'div' );
-  document.querySelector('#bone').appendChild( container );
+    container = document.createElement( 'div' );
+    document.querySelector('#bone').appendChild( container );
 
-  camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 5000 );
-  camera.position.z = 1000;
+    camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 5000 );
+    camera.position.z = 1000;
 
-  scene = new THREE.Scene();
+    scene = new THREE.Scene();
 
-  const textureLoader = new THREE.TextureLoader();
-  const bgTexture = textureLoader.load('https://nkdevil.github.io/webGl/bg_textures/rough_texture.jpg');
-  scene.background = bgTexture;
+    const textureLoader = new THREE.TextureLoader();
+    const bgTexture = textureLoader.load('https://nkdevil.github.io/webGl/bg_textures/rough_texture.jpg');
+    // const bgTexture = textureLoader.load('/webGl/bg_textures/rough_texture.jpg');
+    scene.background = bgTexture;
 
-  // scene.background = new THREE.Color( 0x000000 );
+    // scene.background = new THREE.Color( 0x000000 );
 
-  scene.add( new THREE.AmbientLight( 0x252525 ) );
+    scene.add( new THREE.AmbientLight( 0x252525 ) );
 
-  spotLight = new THREE.SpotLight( 0xFFFFFF );
-  spotLight.position.set(168, 1469, 1097)
-  spotLight.angle = Math.PI / 10;
-  spotLight.distance = 0
+    spotLight = new THREE.SpotLight( 0xFFFFFF );
+    spotLight.position.set(168, 1469, 1097)
+    spotLight.angle = Math.PI / 10;
+    spotLight.distance = 0
 
-  scene.add(spotLight);
-  const helper = new THREE.SpotLight( spotLight );
-  scene.add( helper );
+    scene.add(spotLight);
+    const helper = new THREE.SpotLight( spotLight );
+    scene.add( helper );
 
-  const loader = new GLTFLoader();
-  loader.load( 'https://nkdevil.github.io/webGl/remains/scene.gltf', function ( gltf ) {
-    bone = gltf.scene
-    bone.scale.set(100,100,100)
-    bone.position.set(-285, -150, 580)
-    scene.add( bone );
-    console.log(gltf)
-  }, undefined, function ( error ) {
-
-    console.error( error );
-
-  } );
-
-  renderer = new THREE.WebGLRenderer( { antialias: true } );
-  renderer.setPixelRatio( window.devicePixelRatio );
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFShadowMap;
-
-  container.appendChild( renderer.domElement );
-
-  window.addEventListener( 'resize', onWindowResize );
+    const loader = new GLTFLoader();
+    loader.load( 'https://nkdevil.github.io/webGl/remains/scene.gltf', function ( gltf ) {
+    // loader.load( '/webGl/remains/scene.gltf', function ( gltf ) {
+      isLoad = true
+      bone = gltf.scene
+      bone.scale.set(100,100,100)
+      bone.position.set(-285, -150, 580)
+      scene.add( bone );
+      resolve('GOOD!')
+    }, undefined, function ( error ) {
+      reject(error)
+      console.error( error );
+    });
+  
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+  
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+  
+    container.appendChild( renderer.domElement );
+  
+    window.addEventListener( 'resize', onWindowResize );
+  })
 }
 
 const render = function() {
@@ -98,4 +103,4 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
-export {render, init}
+export {render, init, isLoad}

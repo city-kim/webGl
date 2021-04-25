@@ -17,7 +17,7 @@ export default {
       links: [
         {name: 'bone', title: '유적'},
         {name: 'hill', title: '교회'},
-        // {name: 'box', title: '박스'}
+        {name: 'box', title: '박스'}
       ]
     }
   },
