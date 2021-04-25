@@ -5,8 +5,10 @@
 </template>
 
 <script>
+// import {init} from '@/webGl/webGl_coin'
+import {init} from '@/webGl/webGl_box'
 export default {
-  name: 'app',
+  name: 'coin',
   components: {
   },
   data () {
@@ -18,6 +20,7 @@ export default {
   created () {
   },
   mounted () {
+    init();
   },
   beforeDestroy () {
   },
