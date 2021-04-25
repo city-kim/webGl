@@ -91,11 +91,11 @@ export function changeRotate(obj) {
   // cube.rotation.z = obj.z
   // cube.geometry.attributes.rotation.needsUpdate = true;
   light.position.set( obj.x, obj.y, obj.z );
-  console.log(light)
+  // console.log(light)
 }
 
 function onWindowResize() {
-  console.log('resize!')
+  // console.log('resize!')
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize( window.innerWidth, window.innerHeight );
@@ -114,6 +114,6 @@ function onDocumentMouseMove( event ) {
 }
 
 function onDocumentMouseUP (event) {
-  console.log('?')
-  console.log(event)
+  // console.log('?')
+  // console.log(event)
 }
