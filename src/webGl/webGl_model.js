@@ -28,7 +28,7 @@ function init() {
   scene = new THREE.Scene();
 
   const textureLoader = new THREE.TextureLoader();
-  const bgTexture = textureLoader.load('/webGl/bg_textures/rough_texture.jpg');
+  const bgTexture = textureLoader.load('https://nkdevil.github.io/webGl/bg_textures/rough_texture.jpg');
   scene.background = bgTexture;
 
   // scene.background = new THREE.Color( 0x000000 );
@@ -45,12 +45,12 @@ function init() {
   scene.add( helper );
 
   const loader = new GLTFLoader();
-  loader.load( '/webGl/remains/scene.gltf', function ( gltf ) {
+  loader.load( 'https://nkdevil.github.io/webGl/remains/scene.gltf', function ( gltf ) {
     bone = gltf.scene
     bone.scale.set(100,100,100)
     bone.position.set(-285, -150, 580)
     scene.add( bone );
-
+    console.log(gltf)
   }, undefined, function ( error ) {
 
     console.error( error );

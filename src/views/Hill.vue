@@ -69,7 +69,7 @@ export default {
       // 50, -48, -9
 
       // -144, +14, +4
-      console.log(window.scrollY)
+      // console.log(window.scrollY)
       if (window.scrollY > 1000 && window.scrollY < 2500) {
         this.ui.table = true
       } else {
