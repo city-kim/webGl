@@ -16,7 +16,8 @@ export default {
     return {
       links: [
         {name: 'bone', title: '유적'},
-        {name: 'coin', title: '코인'}
+        {name: 'hill', title: '교회'},
+        // {name: 'box', title: '박스'}
       ]
     }
   },
@@ -37,11 +38,17 @@ export default {
 }
 </script>
 <style lang="scss">
+  body{
+    margin:0;
+  }
+  canvas{display: block;}
   nav{
     width:100%;
     position: fixed;
     top:0;
     left:0;
+    z-index:100;
+    text-align: center;
     a {
       display: inline-block;
       padding: 0.5rem;
@@ -55,6 +62,16 @@ export default {
       &:hover {
         background: #fff;
       }
+    }
+  }
+  .url{
+    position: fixed;
+    z-index: 1000;
+    right:0;
+    bottom:0;
+    a {
+      color:#333;
+      text-decoration: none;
     }
   }
 </style>

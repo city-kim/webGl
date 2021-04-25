@@ -8,9 +8,9 @@ let physics, position;
 
 let boxes, spheres;
 
-init();
+// init();
 
-async function init() {
+export async function init() {
 
   physics = await AmmoPhysics();
   position = new THREE.Vector3();
@@ -95,10 +95,10 @@ async function init() {
   renderer.setSize( window.innerWidth, window.innerHeight );
   renderer.shadowMap.enabled = true;
   renderer.outputEncoding = THREE.sRGBEncoding;
-  document.body.appendChild( renderer.domElement );
+  document.querySelector('#box').appendChild( renderer.domElement );
 
   stats = new Stats();
-  document.body.appendChild( stats.dom );
+  document.querySelector('#box').appendChild( stats.dom );
 
   //
 

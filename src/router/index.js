@@ -15,6 +15,16 @@ const routes = [
     component: () => import('@/views/Bone'),
   },
   {
+    path: '/hill',
+    name: 'hill',
+    component: () => import('@/views/Hill'),
+  },
+  {
+    path: '/box',
+    name: 'box',
+    component: () => import('@/views/Box'),
+  },
+  {
     path: '/coin',
     name: 'coin',
     component: () => import('@/views/Coin'),

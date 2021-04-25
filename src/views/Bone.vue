@@ -1,7 +1,7 @@
 <template>
   <div id="bone">
     <div id="info">REAMINS</div>
-    <div id="url">
+    <div class="url">
       <a href="https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061" target="_blank">USED: https://sketchfab.com/3d-models/remains-7663ab71893f44b2b6466db3c625b061</a>
     </div>
   </div>
@@ -37,10 +37,6 @@ export default {
 </script>
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Tangerine');
-body{
-  margin:0;
-}
-canvas{display: block;}
 #info {
 	display:block;
 	width: 100%;
@@ -54,14 +50,5 @@ canvas{display: block;}
 	top: 30rem;
 	z-index: 100;
   box-sizing: border-box;
-}
-#url{
-  position: fixed;
-  right:0;
-  bottom:0;
-  a {
-    color:#333;
-    text-decoration: none;
-  }
 }
 </style>
