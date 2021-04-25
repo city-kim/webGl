@@ -1,0 +1,1 @@
+@import url(https://fonts.googleapis.com/css?family=Tangerine);body{margin:0}#info,canvas{display:block}#info{width:100%;padding-right:10rem;font-family:Tangerine,serif;font-size:4rem;font-weight:900;color:hsla(0,0%,100%,.2);text-align:right;position:absolute;top:30rem;z-index:100;box-sizing:border-box}#url{position:fixed;right:0;bottom:0}#url a{color:#333;text-decoration:none}
