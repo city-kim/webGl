@@ -31,7 +31,7 @@ function init() {
   scene = new THREE.Scene();
 
   const textureLoader = new THREE.TextureLoader();
-  const bgTexture = textureLoader.load('/bg_textures/rough_texture.jpg');
+  const bgTexture = textureLoader.load('/webGl/bg_textures/rough_texture.jpg');
   scene.background = bgTexture;
 
   // scene.background = new THREE.Color( 0x000000 );
@@ -46,7 +46,7 @@ function init() {
   scene.add(spotLight);
 
   const loader = new GLTFLoader();
-  loader.load( '/hintze_hall_nhm_london_surface_model/scene.gltf', function ( gltf ) {
+  loader.load( '/webGl/hintze_hall_nhm_london_surface_model/scene.gltf', function ( gltf ) {
     bone = gltf.scene
     bone.scale.set(10, 10, 10)
     bone.position.set(41, 9, -89)
