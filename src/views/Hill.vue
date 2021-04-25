@@ -1,10 +1,11 @@
 <template>
-  <div id="hill">
+  <div id="hill" v-bind:class="{'isScroll' : ui.fileLoad}">
     <!-- <div style="position:fixed; top:2rem; right:0;">
       <input type="range" min="-150" max="150" v-model="position.x" @change="changePosition()">
       <input type="range" min="-150" max="150" v-model="position.y" @change="changePosition()">
       <input type="range" min="-150" max="150" v-model="position.z" @change="changePosition()">
     </div> -->
+    <div class="hill-loading" v-show="!ui.fileLoad">LOADING...</div>
     <transition name="fade">
       <article v-show="ui.table" class="view-talbe">
         <h2>TABLE</h2>
@@ -40,7 +41,8 @@ export default {
       ui: {
         table: false,
         whale: false,
-        statue: false
+        statue: false,
+        fileLoad: false
       },
       position: {
         x: 41,
@@ -54,10 +56,17 @@ export default {
   },
   created () {
   },
-  mounted () {
-    init();
-    render();
-    window.addEventListener('scroll', this.changePosition);
+  async mounted () {
+    await init()
+    .then((res) => {
+      // console.log(res)
+      render();
+      window.addEventListener('scroll', this.changePosition);
+      this.ui.fileLoad = true;
+    })
+    .catch((err) => {
+      console.log(err)
+    });
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.changePosition);
@@ -108,7 +117,10 @@ export default {
   opacity: 0;
 }
 #hill {
-  height:calc(100vh + 10000px);
+  height:100vh;
+  &.isScroll {
+    height:calc(100vh + 10000px);
+  }
   canvas {
     position:fixed;
     width:100%;
@@ -142,5 +154,15 @@ export default {
 }
 body::-webkit-scrollbar {
   display: none;
+}
+.hill-loading {
+  position: fixed;
+  width:100%;
+  top:20vh;
+  left:0;
+  z-index:10;
+  font-size:30px;
+  color:#fff;
+  text-align: center;
 }
 </style>
